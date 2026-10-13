@@ -25,19 +25,19 @@ namespace getset
             Console.WriteLine("====================================================================");
             Console.WriteLine("Rules: ");
             Console.WriteLine("- You have 3 tries to guess the number");
-            Console.WriteLine("- The number can only range from 0-9");
+            Console.WriteLine("- The number only ranges from 0-9");
             Console.WriteLine("- There are hints at the bottom of the screen");
-            Console.WriteLine("====================================================================");
 
             Guess.TargetNum = random.Next(10);
 
-            for (int health = 0; health < 3; health++)
+            for (int health = 3; health > 0; health--)
             {
+                Console.WriteLine("--------------------------------------------------------------");
+                Console.WriteLine("Lives: " + health);
                 Console.WriteLine("Please enter a number: ");
                 Guess.UserNum = Convert.ToInt32(Console.ReadLine());
                 Guess.Hint = "";
                 Console.WriteLine("Hint: " + Guess.Hint);
-                Console.WriteLine(Guess.TargetNum);
                 if (Guess.UserNum == Guess.TargetNum)
                 {
                     value = true;
@@ -47,11 +47,15 @@ namespace getset
 
             if (value)
             {
+                Console.WriteLine("====================================================================");
                 Console.WriteLine("Congratulations for winning!");
+                Console.WriteLine("====================================================================");
             }
             else
             {
-                Console.WriteLine("The number is: " + Guess.TargetNum);
+                Console.WriteLine("====================================================================");
+                Console.WriteLine("Oops! The number is: " + Guess.TargetNum);
+                Console.WriteLine("====================================================================");
             }
 
             Console.ReadKey();
@@ -83,9 +87,13 @@ namespace getset
                     {
                         hint = "A little lower!";
                     }
-                    else
+                    else if (UserNum < TargetNum) 
                     {
                         hint = "A little higher!";
+                    }
+                    else
+                    {
+                        hint = "You've got it!";
                     }
                 }
                
